@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TabsEnum } from './models/tabs-enum';
 
 @Component({
   selector: 'app-root',

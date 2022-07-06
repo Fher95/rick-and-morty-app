@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CharacterService } from '../services/character.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-character-list',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CharacterListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private characterService: CharacterService) { }
 
   ngOnInit(): void {
+    this.characterService.getAllCharacters()
+      .pipe(
+        tap(res => console.log(res))
+      )
+      .subscribe();
   }
 
 }

@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { CharactersRoutingModule } from './characters-routing.module';
 import { CharacterListComponent } from './character-list/character-list.component';
 import { CharacterDetailComponent } from './character-detail/character-detail.component';
 import { CharacterCardComponent } from './character-card/character-card.component';
+import { CharacterService } from './services/character.service';
 
 @NgModule({
+  providers: [CharacterService],
   declarations: [
     CharacterListComponent,
     CharacterDetailComponent,
@@ -14,7 +17,8 @@ import { CharacterCardComponent } from './character-card/character-card.componen
   ],
   imports: [
     CommonModule,
-    CharactersRoutingModule
+    CharactersRoutingModule,
+    HttpClientModule
   ]
 })
 export class CharactersModule { }
