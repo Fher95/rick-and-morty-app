@@ -4,23 +4,13 @@ import { CommonModule } from '@angular/common';
 import { CharactersRoutingModule } from './characters-routing.module';
 import { CharacterListComponent } from './character-list/character-list.component';
 import { CharacterDetailComponent } from './character-detail/character-detail.component';
-import { Routes } from '@angular/router';
-
-const routes: Routes = [
-  {
-    path: '',
-    component: CharacterListComponent
-  },
-  {
-    path: 'detail',
-    component: CharacterDetailComponent
-  }
-];
+import { CharacterCardComponent } from './character-card/character-card.component';
 
 @NgModule({
   declarations: [
     CharacterListComponent,
-    CharacterDetailComponent
+    CharacterDetailComponent,
+    CharacterCardComponent
   ],
   imports: [
     CommonModule,

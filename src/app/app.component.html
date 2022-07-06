@@ -1,4 +1,4 @@
-<div id="NavBar" class="container-fluid py-3 bg-light shadow" >
+<div id="NavBar" class="container-fluid py-3 bg-light shadow sticky-top" >
   <ul class="nav justify-content-between">
     <div class="nav nav-pills">
       <li class="nav-item">
@@ -17,12 +17,8 @@
     </form>
   </ul>
 </div>
-<!-- <h1>
-  {{title}}
-</h1> -->
 
-<!-- <button type="button" routerLink="/characters">Characters</button>
-<button type="button" routerLink="/locations">Locations</button>
-<button type="button" routerLink="/episodes">Episodes</button> -->
 <br>
-<router-outlet></router-outlet>
+<div class="container-fluid justify-content-center">
+  <router-outlet></router-outlet>
+</div>
