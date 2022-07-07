@@ -13,7 +13,7 @@ export class CharacterService {
     return this.httpClient.get<CharacterListModel>('https://rickandmortyapi.com/api/character');
   }
 
-  getCharacter(characterId: number): Observable<CharacterInfoModel> {
+  getCharacter(characterId: string): Observable<CharacterInfoModel> {
     return this.httpClient.get<CharacterInfoModel>('https://rickandmortyapi.com/api/character/'+characterId);
   }
 

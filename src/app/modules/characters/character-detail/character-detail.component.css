@@ -1,0 +1,11 @@
+img {
+    width: 20rem;
+    height: 20rem;
+    margin: 0px;
+    opacity: 1;
+    transition: opacity 0.5s ease 0s;
+    display: block;
+    object-position: center center;
+    object-fit: cover;
+    border-radius: 10rem;
+}

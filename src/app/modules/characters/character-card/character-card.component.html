@@ -11,7 +11,7 @@
   </div>
   <div class="col d-flex overflow-auto p-3">
     <section>
-      <a href="" class="text-decoration-none"><h4>{{this.inCharacterInfo?.name}}</h4></a>
+      <a [href]="'/characters/detail/'+this.inCharacterInfo?.id" class="text-decoration-none"><h4>{{this.inCharacterInfo?.name}}</h4></a>
       <div class="d-flex align-items-baseline">
         <div
           id="circulo color"
