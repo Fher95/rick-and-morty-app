@@ -1,7 +1,6 @@
 <div
   id="Character Card"
-  class="d-flex border overflow-hidden m-2 shadow"
-  style="border-radius: 15px !important; width: 25rem; height: 90%;"
+  class="d-flex border overflow-hidden m-2 shadow character-card"
 >
   <div class="col d-flex">
     <img
@@ -15,22 +14,16 @@
       <div class="d-flex align-items-baseline">
         <div
           id="circulo color"
-          style="
-            height: 10px;
-            width: 10px !important;
-            background-color: green;
-            border-radius: 5px;
-          "
+          class="green-point"
         ></div>
         <span class="col ps-2">{{this.inCharacterInfo?.status}} - {{this.inCharacterInfo?.species}}</span>
       </div>
-      <div class="section">
-        <span>Last known location: </span><br />
+      <div class="section mt-1">
+        <span class="text-secondary">Location: </span><br />
         <a href="'{{this.inCharacterInfo?.location?.url}}'" class="text-decoration-none">{{this.inCharacterInfo?.location?.name}}</a>
       </div>
-
-      <div class="section">
-        <span>Origin: </span><br />
+      <div class="section mt-1">
+        <span class="text-secondary">Origin: </span><br />
         <a href="'{{this.inCharacterInfo?.origin?.name}}'" class="text-decoration-none">{{this.inCharacterInfo?.origin?.name }}</a>
       </div>
     </section>
