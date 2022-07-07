@@ -13,7 +13,14 @@ export class CharacterService {
     return this.httpClient.get<CharacterListModel>('https://rickandmortyapi.com/api/character');
   }
 
-  getCharacter(): Observable<CharacterInfoModel> {
-    return this.httpClient.get<CharacterInfoModel>('https://rickandmortyapi.com/api/character/2');
+  getCharacter(characterId: number): Observable<CharacterInfoModel> {
+    return this.httpClient.get<CharacterInfoModel>('https://rickandmortyapi.com/api/character/'+characterId);
+  }
+
+  getCharactersByPageUrl(urlPage: string) {
+    return this.httpClient.get<CharacterListModel>(urlPage);
+  }
+  getCharactersByPageNumber(pageNum: number) {
+    return this.httpClient.get<CharacterListModel>('https://rickandmortyapi.com/api/character?page=' + pageNum);
   }
 }
