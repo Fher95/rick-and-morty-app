@@ -1,19 +1,17 @@
 <div
   id="Character Card"
-  class="d-flex border overflow-hidden m-3 shadow"
-  style="border-radius: 15px !important"
+  class="d-flex border overflow-hidden m-2 shadow"
+  style="border-radius: 15px !important; width: 25rem; height: 90%;"
 >
   <div class="col d-flex">
     <img
-      class="d-flex"
-      style="max-width: 200px"
-      src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+      [src]="this.inCharacterInfo?.image"
       alt=""
     />
   </div>
   <div class="col d-flex overflow-auto p-3">
     <section>
-      <a href="" class="text-decoration-none"><h3>Rick Sanchez</h3></a>
+      <a href="" class="text-decoration-none"><h4>{{this.inCharacterInfo?.name}}</h4></a>
       <div class="d-flex align-items-baseline">
         <div
           id="circulo color"
@@ -24,16 +22,16 @@
             border-radius: 5px;
           "
         ></div>
-        <span class="col ps-2">Alive - Human</span>
+        <span class="col ps-2">{{this.inCharacterInfo?.status}} - {{this.inCharacterInfo?.species}}</span>
       </div>
       <div class="section">
         <span>Last known location: </span><br />
-        <a href="" class="text-decoration-none">Citadel of ricks</a>
+        <a href="'{{this.inCharacterInfo?.location?.url}}'" class="text-decoration-none">{{this.inCharacterInfo?.location?.name}}</a>
       </div>
 
       <div class="section">
-        <span>First seen in: </span><br />
-        <a href="" class="text-decoration-none">The Ricklantis Mixup</a>
+        <span>Origin: </span><br />
+        <a href="'{{this.inCharacterInfo?.origin?.name}}'" class="text-decoration-none">{{this.inCharacterInfo?.origin?.name }}</a>
       </div>
     </section>
   </div>
