@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, Action } from '@ngrx/store';
+import { AppRickMortyState } from '../../models/app.state.model';
+// import { SetTabAction } from '../../modules/characters/state/character.actions';
+import { setTab } from '../../state/app.actions';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<AppRickMortyState>) { 
+    this.store.select('tabIndex').subscribe(currentTabIndex => this.selectedTab = currentTabIndex);
+  }
 
   ngOnInit(): void {
     this.onSelectTab(0);
@@ -17,7 +23,8 @@ export class HomeComponent implements OnInit {
   selectedTab = 0;
 
   public onSelectTab(tabIndex: number): void {
-    this.selectedTab = tabIndex;
+    const action = setTab({tabIndex});
+    this.store.dispatch(action);
   }
 
   public activeTab(tabIndex: number): string {

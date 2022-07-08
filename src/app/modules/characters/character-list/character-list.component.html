@@ -35,7 +35,7 @@
       <button
         class="page-link"
         (click)="this.onNextPage()"
-        [hidden]="this.nextPage < 0"
+        [hidden]="this.nextPage > this.numberOfPages"
       >
         {{ this.nextPage }}
       </button>

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CharacterService } from '../services/character.service';
 import { tap } from 'rxjs/operators';
 import { CharacterListModel } from 'src/app/models/character-list.model';
+import { Store } from '@ngrx/store';
+import { AppRickMortyState } from '../../../models/app.state.model';
+import { retrievedCharacterList } from '../state/character.actions';
 
 @Component({
   selector: 'app-character-list',
@@ -10,22 +13,27 @@ import { CharacterListModel } from 'src/app/models/character-list.model';
 })
 export class CharacterListComponent implements OnInit {
 
-  constructor(private characterService: CharacterService) { }
+  constructor(private characterService: CharacterService, private store: Store<AppRickMortyState>) { }
 
-  characterList: CharacterListModel | undefined;
+  characterList: CharacterListModel | any;
   previousPage = 0;
   currentPage = 1;
   nextPage = 2;
   numberOfPages = 0;
 
   ngOnInit(): void {
-    this.characterService.getCharactersByPageNumber(this.currentPage)
+    this.listenToListChange();
+    this.loadCharacterListPage(1);
+  }
+
+  private listenToListChange() {
+    this.store.select('characterList')
       .pipe(
-        tap(res => {
-          this.characterList = res;
-          this.numberOfPages = this.characterList.info.pages;
-        })
-      )
+        tap((characterListObject) => 
+        { 
+          this.characterList = characterListObject;
+          this.numberOfPages = this.numberOfPages === 0 ? characterListObject.info.pages : this.numberOfPages;
+        }))
       .subscribe();
   }
 
@@ -37,10 +45,11 @@ export class CharacterListComponent implements OnInit {
   }
 
   loadCharacterListPage(pageNumber: number) {
-    this.setPageNumbers();
+    this.setPageNumbers(pageNumber);
     this.characterService.getCharactersByPageNumber(pageNumber).pipe(
       tap(res => {
-        this.characterList = res;
+        const action = retrievedCharacterList({ characterList: res });
+        this.store.dispatch(action);
       })
     )
       .subscribe();
@@ -57,14 +66,8 @@ export class CharacterListComponent implements OnInit {
     return Number(urlNextPage.substring(urlNextPage.indexOf('=') + 1));
   }
 
-  setPageNumbers() {
-    this.previousPage = this.currentPage - 1;
-    this.nextPage = this.currentPage + 1;
-    if (this.nextPage > this.numberOfPages) {
-      this.nextPage = -1;
-    }
-    if (this.previousPage < 1) {
-      this.previousPage = -1;
-    }
+  setPageNumbers(currentPage: number) {
+    this.previousPage = currentPage - 1;
+    this.nextPage = currentPage + 1;
   }
 }
