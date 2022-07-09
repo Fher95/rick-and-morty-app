@@ -1,10 +1,10 @@
+import { Store } from '@ngrx/store';
+import { tap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { CharacterService } from '../services/character.service';
-import { tap } from 'rxjs/operators';
-import { CharacterListModel } from 'src/app/models/character-list.model';
-import { Store } from '@ngrx/store';
-import { AppRickMortyState } from '../../../models/app.state.model';
 import { retrievedCharacterList } from '../state/character.actions';
+import { CharacterListModel } from 'src/app/models/character-list.model';
+import { AppRickMortyStateModel, SearchParamsModel } from 'src/app/models/app.state.model';
 
 @Component({
   selector: 'app-character-list',
@@ -13,61 +13,69 @@ import { retrievedCharacterList } from '../state/character.actions';
 })
 export class CharacterListComponent implements OnInit {
 
-  constructor(private characterService: CharacterService, private store: Store<AppRickMortyState>) { }
+  constructor(private characterService: CharacterService, private store: Store<AppRickMortyStateModel>) { }
 
   characterList: CharacterListModel | any;
   previousPage = 0;
   currentPage = 1;
   nextPage = 2;
   numberOfPages = 0;
+  lastNameSearch: string | null = null;
 
   ngOnInit(): void {
     this.listenToListChange();
-    this.loadCharacterListPage(1);
+    this.loadCharacterListParams(1);
+    this.listenToSearchName();
+  }
+
+  private listenToSearchName() {
+    this.store.select('searchName')
+      .pipe(tap(
+        text => { this.loadCharacterListParams(1, text); this.lastNameSearch = text }
+      ))
+      .subscribe()
   }
 
   private listenToListChange() {
     this.store.select('characterList')
       .pipe(
-        tap((characterListObject) => 
-        { 
+        tap((characterListObject) => {
           this.characterList = characterListObject;
-          this.numberOfPages = this.numberOfPages === 0 ? characterListObject.info.pages : this.numberOfPages;
+          this.numberOfPages = characterListObject.info.pages;
         }))
       .subscribe();
   }
 
-  onNextPage() {
-    if (this.currentPage < this.numberOfPages) {
-      this.currentPage++;
-      this.loadCharacterListPage(this.currentPage);
-    }
-  }
-
-  loadCharacterListPage(pageNumber: number) {
+  private loadCharacterListParams(pageNumber: number, searchText?: string | null) {
     this.setPageNumbers(pageNumber);
-    this.characterService.getCharactersByPageNumber(pageNumber).pipe(
-      tap(res => {
-        const action = retrievedCharacterList({ characterList: res });
+    const paramsQuery: SearchParamsModel = { page: pageNumber, name: searchText !== '' ? searchText : null }
+    this.characterService.getCharactersWithParams(paramsQuery).pipe(
+      tap(characterList => {
+        const action = retrievedCharacterList({ characterList: characterList });
         this.store.dispatch(action);
       })
     )
       .subscribe();
   }
 
-  onPreviousPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.loadCharacterListPage(this.currentPage);
-    }
-  }
-
-  extractPageNumberFromPath(urlNextPage: string) {
-    return Number(urlNextPage.substring(urlNextPage.indexOf('=') + 1));
-  }
-
-  setPageNumbers(currentPage: number) {
+  private setPageNumbers(currentPage: number) {
+    this.currentPage = currentPage;
     this.previousPage = currentPage - 1;
     this.nextPage = currentPage + 1;
   }
+
+  public onPreviousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadCharacterListParams(this.currentPage, this.lastNameSearch);
+    }
+  }
+
+  public onNextPage() {
+    if (this.currentPage < this.numberOfPages) {
+      this.currentPage++;
+      this.loadCharacterListParams(this.currentPage, this.lastNameSearch);
+    }
+  }
+
 }
