@@ -9,3 +9,7 @@ img {
     object-fit: cover;
     border-radius: 10rem;
 }
+
+.border-rounded {
+    border-radius: 1rem;
+}

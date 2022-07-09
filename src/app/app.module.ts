@@ -6,12 +6,9 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
-import { tabsReducer, searchReducer } from './state/app.reducers';
-import { charactersReducer } from './modules/characters/state/character.reducer';
+import { appReducers } from './state/app.reducers';
 import { environment } from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { locationsReducer } from './modules/locations/state/locations.reducers';
-import { episodesReducer } from './modules/episodes/state/episode.reducers';
 
 @NgModule({
   declarations: [
@@ -20,9 +17,7 @@ import { episodesReducer } from './modules/episodes/state/episode.reducers';
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot(
-      {tabIndex: tabsReducer,characterList: charactersReducer, searchName: searchReducer, locationsList: locationsReducer, episodesList: episodesReducer}
-      ),
+    StoreModule.forRoot(appReducers),
     ReactiveFormsModule,
     FormsModule,
     StoreDevtoolsModule.instrument({

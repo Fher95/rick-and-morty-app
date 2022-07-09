@@ -5,6 +5,7 @@
   <div class="col d-flex">
     <img
       [src]="this.inCharacterInfo?.image"
+      (click)="this.onImgClick()"
       alt="{{this.inCharacterInfo?.name}}"
     />
   </div>
