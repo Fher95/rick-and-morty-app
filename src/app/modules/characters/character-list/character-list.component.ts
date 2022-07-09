@@ -58,24 +58,31 @@ export class CharacterListComponent implements OnInit {
       .subscribe();
   }
 
-  private setPageNumbers(currentPage: number) {
-    this.currentPage = currentPage;
-    this.previousPage = currentPage - 1;
-    this.nextPage = currentPage + 1;
+  private setPageNumbers(newCurrentPage: number) {
+    this.currentPage = newCurrentPage;
+    this.previousPage = newCurrentPage - 1;
+    this.nextPage = newCurrentPage + 1;
   }
 
   public onPreviousPage() {
     if (this.currentPage > 1) {
-      this.currentPage--;
-      this.loadCharacterListParams(this.currentPage, this.lastNameSearch);
+      this.loadCharacterListParams(this.currentPage - 1, this.lastNameSearch);
     }
   }
 
   public onNextPage() {
     if (this.currentPage < this.numberOfPages) {
-      this.currentPage++;
-      this.loadCharacterListParams(this.currentPage, this.lastNameSearch);
+      this.loadCharacterListParams(this.currentPage + 1, this.lastNameSearch);
     }
+  }
+
+  public onFirstPage() {
+    this.loadCharacterListParams(1, this.lastNameSearch);
+
+  }
+
+  public onLastPage() {
+    this.loadCharacterListParams(this.numberOfPages, this.lastNameSearch);
   }
 
 }
