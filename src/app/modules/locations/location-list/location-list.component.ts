@@ -5,6 +5,7 @@ import { tap } from 'rxjs/operators';
 import { AppRickMortyStateModel, SearchParamsModel } from 'src/app/models/app.state.model';
 import { Store } from '@ngrx/store';
 import { retrievedLocationsList } from '../state/location.actions';
+import { setTab } from 'src/app/state/app.actions';
 
 @Component({
   selector: 'app-location-list',
@@ -13,7 +14,7 @@ import { retrievedLocationsList } from '../state/location.actions';
 })
 export class LocationListComponent implements OnInit {
 
-  public locationsList: LocationListModel | null = null ;
+  public locationsList: LocationListModel | null = null;
   previousPage = 0;
   currentPage = 1;
   nextPage = 2;
@@ -26,11 +27,7 @@ export class LocationListComponent implements OnInit {
     this.listenToListChange();
     this.loadLocationListParams(1);
     this.listenToSearchName();
-    // this.locationService.getLocationsWithParams({page:1, name: null})
-    // .pipe(tap(
-    //   listLocations => {this.locationsList = listLocations} 
-    // ))
-    // .subscribe();
+    this.store.dispatch(setTab({ tabIndex: 1 }))
   }
 
   private listenToSearchName() {
@@ -45,7 +42,6 @@ export class LocationListComponent implements OnInit {
     this.store.select('locationsList')
       .pipe(
         tap((locationsListObject) => {
-          debugger
           this.locationsList = locationsListObject;
           this.numberOfPages = locationsListObject.info.pages;
         }))
@@ -53,7 +49,6 @@ export class LocationListComponent implements OnInit {
   }
 
   private loadLocationListParams(pageNumber: number, searchText?: string | null) {
-    debugger
     this.setPageNumbers(pageNumber);
     const paramsQuery: SearchParamsModel = { page: pageNumber, name: searchText !== '' ? searchText : null }
     this.locationService.getLocationsWithParams(paramsQuery).pipe(

@@ -5,6 +5,7 @@ import { CharacterService } from '../services/character.service';
 import { retrievedCharacterList } from '../state/character.actions';
 import { CharacterListModel } from 'src/app/modules/characters/models/character-list.model';
 import { AppRickMortyStateModel, SearchParamsModel } from 'src/app/models/app.state.model';
+import { setTab } from 'src/app/state/app.actions';
 
 @Component({
   selector: 'app-character-list',
@@ -26,6 +27,7 @@ export class CharacterListComponent implements OnInit {
     this.listenToListChange();
     this.loadCharacterListParams(1);
     this.listenToSearchName();
+    this.store.dispatch(setTab({ tabIndex: 0 }));
   }
 
   private listenToSearchName() {

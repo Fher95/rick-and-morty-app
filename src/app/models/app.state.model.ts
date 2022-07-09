@@ -1,12 +1,11 @@
 import { CharacterListModel } from '../modules/characters/models/character-list.model';
 import { TabsEnum } from './tabs-enum';
 import { LocationListModel } from '../modules/locations/models/location-list.model';
+import { EpisodeListModel } from '../modules/episodes/model/episode-list.model';
 export interface AppRickMortyStateModel {
     characterList: CharacterListModel,
     locationsList: LocationListModel,
-    // currentCharactersPage: number,
-    // currentLocationsPage: number,
-    // currentEpisodesPage: number,
+    episodesList: EpisodeListModel,
     tabIndex: TabsEnum,
     searchName: string
 }

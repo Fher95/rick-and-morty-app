@@ -7,8 +7,6 @@ import { getCleanParams } from 'src/app/models/utils';
 @Injectable()
 export class LocationService {
 
-  // https://rickandmortyapi.com/api/location
-
   constructor(private httpClient: HttpClient) { }
 
   getLocationsWithParams(objectParams: SearchParamsModel) {

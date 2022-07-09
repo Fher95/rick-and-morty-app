@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectTabIndex } from 'src/app/state/app.selectors';
-import { searchCharacterByName } from 'src/app/modules/characters/state/character.actions';
 import { tap } from 'rxjs/operators';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { setTab } from 'src/app/state/app.actions';
-import { AppRickMortyStateModel } from 'src/app/models/app.state.model';
 import { TabsEnum } from 'src/app/models/tabs-enum';
-import { searchLocationsByName } from '../../modules/locations/state/location.actions';
+import { selectTabIndex } from 'src/app/state/app.selectors';
+import { AppRickMortyStateModel } from 'src/app/models/app.state.model';
+import { searchEpisodesByName } from 'src/app/modules/episodes/state/episode.actions';
+import { searchLocationsByName } from 'src/app/modules/locations/state/location.actions';
+import { searchCharacterByName } from 'src/app/modules/characters/state/character.actions';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.onSelectTab(0);
+    // this.onSelectTab(0);
   }
 
   public onSelectTab(tabIndex: number): void {
@@ -50,10 +51,10 @@ export class HomeComponent implements OnInit {
               case TabsEnum.LOCATIONS:
                 action = searchLocationsByName({ searchName: searchText });
                 break;
-              // case TabsEnum.CHARACTERS:
-              //   action = searchCharacterByName({ searchName: searchText });
-              //   break;
-            
+              case TabsEnum.EPISODES:
+                action = searchEpisodesByName({ searchName: searchText });
+                break;
+
               default:
                 break;
             }

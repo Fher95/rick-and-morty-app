@@ -11,6 +11,7 @@ import { charactersReducer } from './modules/characters/state/character.reducer'
 import { environment } from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { locationsReducer } from './modules/locations/state/locations.reducers';
+import { episodesReducer } from './modules/episodes/state/episode.reducers';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { locationsReducer } from './modules/locations/state/locations.reducers';
   imports: [
     BrowserModule,
     StoreModule.forRoot(
-      {tabIndex: tabsReducer,characterList: charactersReducer, searchName: searchReducer, locationsList: locationsReducer}
+      {tabIndex: tabsReducer,characterList: charactersReducer, searchName: searchReducer, locationsList: locationsReducer, episodesList: episodesReducer}
       ),
     ReactiveFormsModule,
     FormsModule,

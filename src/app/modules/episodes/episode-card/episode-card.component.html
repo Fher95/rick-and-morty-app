@@ -1,0 +1,31 @@
+<div class="d-flex border rounded-2 shadow p-3 episode-card">
+  <div class="col">
+    <a class="text-decoration-none text-center" href="/characters"
+      ><h4>{{ this.episodeInfo?.name }}</h4>
+    </a>
+    <div class="row my-3 mb-3">
+      <div class="col">
+        <span class="d-flex text-secondary">Episode: </span>
+        <span>{{ this.episodeInfo?.episode }}</span>
+      </div>
+
+      <div class="col">
+        <span class="d-flex text-secondary">Created: </span>
+        <span>{{ this.episodeInfo?.created | date }}</span>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col">
+        <span class="d-flex text-secondary">Characters: </span>
+        <a href="/characters">
+          <span>{{ this.episodeInfo?.characters?.length }}</span>
+        </a>
+      </div>
+
+      <div class="col">
+        <span class="d-flex text-secondary">Air date: </span>
+        <span>{{ this.episodeInfo?.air_date }}</span>
+      </div>
+    </div>
+  </div>
+</div>
