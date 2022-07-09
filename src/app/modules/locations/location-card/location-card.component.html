@@ -1,0 +1,31 @@
+<div class="d-flex border rounded-2 shadow p-3 location-card">
+  <div class="col">
+    <a class="text-decoration-none text-center" href="/characters"
+      ><h4>{{ this.locationInfo?.name }}</h4>
+    </a>
+    <div class="row my-3 mb-3">
+      <div class="col">
+        <span class="d-flex text-secondary">Type: </span>
+        <span>{{ this.locationInfo?.type }}</span>
+      </div>
+
+      <div class="col">
+        <span class="d-flex text-secondary">Created: </span>
+        <span>{{ this.locationInfo?.created | date }}</span>
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col">
+        <span class="d-flex text-secondary">Dimension: </span>
+        <span>{{ this.locationInfo?.dimension }}</span>
+      </div>
+
+      <div class="col">
+        <span class="d-flex text-secondary">Number of residents: </span>
+        <a href="/characters"
+          ><span>{{ this.locationInfo?.residents?.length }}</span></a
+        >
+      </div>
+    </div>
+  </div>
+</div>

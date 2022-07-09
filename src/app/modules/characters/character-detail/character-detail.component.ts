@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CharacterInfoModel } from '../../../models/character-info.model';
+import { CharacterInfoModel } from '../models/character-info.model';
 import { CharacterService } from '../services/character.service';
 import { tap } from 'rxjs/operators';
 

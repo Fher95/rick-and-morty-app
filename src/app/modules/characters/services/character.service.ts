@@ -1,9 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CharacterListModel } from '../../../models/character-list.model';
-import { CharacterInfoModel } from '../../../models/character-info.model';
-import { SearchParamsModel } from '../../../models/app.state.model';
+import { Injectable } from '@angular/core';
+import { getCleanParams } from 'src/app/models/utils';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { SearchParamsModel } from 'src/app/models/app.state.model';
+import { CharacterInfoModel } from '../models/character-info.model';
+import { CharacterListModel } from '../models/character-list.model';
 
 @Injectable()
 export class CharacterService {
@@ -31,14 +32,7 @@ export class CharacterService {
   }
 
   getCharactersWithParams(objectParams: SearchParamsModel) {
-    return this.httpClient.get<CharacterListModel>('https://rickandmortyapi.com/api/character/', { params: this.getCleanParams(objectParams) })
+    return this.httpClient.get<CharacterListModel>('https://rickandmortyapi.com/api/character/', { params: getCleanParams(objectParams) })
   }
 
-  getCleanParams(filter: any) {
-    let queryParams = new HttpParams();
-    Object.keys(filter).forEach(
-      key => filter[key] && (queryParams = queryParams.append(key, filter[key]))
-    );
-    return queryParams;
-  }
 }

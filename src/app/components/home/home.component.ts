@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { setTab } from 'src/app/state/app.actions';
 import { AppRickMortyStateModel } from 'src/app/models/app.state.model';
 import { TabsEnum } from 'src/app/models/tabs-enum';
+import { searchLocationsByName } from '../../modules/locations/state/location.actions';
 
 @Component({
   selector: 'app-home',
@@ -40,9 +41,23 @@ export class HomeComponent implements OnInit {
       .pipe(tap(
         {
           next: (selectedIndex) => {
-            if (selectedIndex == TabsEnum.CHARACTERS) {
-              let searchText = this.searchForm.get('searchWord')?.value || '';
-              const action = searchCharacterByName({ searchName: searchText });
+            let searchText = this.searchForm.get('searchWord')?.value || '';
+            let action = null;
+            switch (selectedIndex) {
+              case TabsEnum.CHARACTERS:
+                action = searchCharacterByName({ searchName: searchText });
+                break;
+              case TabsEnum.LOCATIONS:
+                action = searchLocationsByName({ searchName: searchText });
+                break;
+              // case TabsEnum.CHARACTERS:
+              //   action = searchCharacterByName({ searchName: searchText });
+              //   break;
+            
+              default:
+                break;
+            }
+            if (action !== null) {
               this.store.dispatch(action);
             }
           },

@@ -10,6 +10,7 @@ import { tabsReducer, searchReducer } from './state/app.reducers';
 import { charactersReducer } from './modules/characters/state/character.reducer';
 import { environment } from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { locationsReducer } from './modules/locations/state/locations.reducers';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({tabIndex: tabsReducer,characterList: charactersReducer, searchName: searchReducer}),
+    StoreModule.forRoot(
+      {tabIndex: tabsReducer,characterList: charactersReducer, searchName: searchReducer, locationsList: locationsReducer}
+      ),
     ReactiveFormsModule,
     FormsModule,
     StoreDevtoolsModule.instrument({

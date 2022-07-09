@@ -1,10 +1,6 @@
+import { InfoPages } from 'src/app/models/app.state.model';
 import { CharacterInfoModel } from './character-info.model';
 export interface CharacterListModel {
-    info: {
-      count: number,
-      pages: number,
-      next: string,
-      prev: string
-    },
+    info: InfoPages,
     results: CharacterInfoModel[]
   }

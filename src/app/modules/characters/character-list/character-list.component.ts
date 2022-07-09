@@ -3,7 +3,7 @@ import { tap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { CharacterService } from '../services/character.service';
 import { retrievedCharacterList } from '../state/character.actions';
-import { CharacterListModel } from 'src/app/models/character-list.model';
+import { CharacterListModel } from 'src/app/modules/characters/models/character-list.model';
 import { AppRickMortyStateModel, SearchParamsModel } from 'src/app/models/app.state.model';
 
 @Component({

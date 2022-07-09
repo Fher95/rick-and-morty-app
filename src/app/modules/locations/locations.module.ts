@@ -2,21 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LocationsRoutingModule } from './locations-routing.module';
-import { Routes } from '@angular/router';
 import { LocationListComponent } from './location-list/location-list.component';
-
-const routes: Routes = [
-  {
-    path: '',
-    component: LocationListComponent
-  }
-];
+import { LocationCardComponent } from './location-card/location-card.component';
+import { LocationService } from './service/location.service';
+import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
-  declarations: [],
+  providers: [LocationService],
+  declarations: [
+    LocationListComponent,
+    LocationCardComponent,
+  ],
   imports: [
     CommonModule,
-    LocationsRoutingModule
+    LocationsRoutingModule,
+    HttpClientModule
   ]
 })
 export class LocationsModule { }
