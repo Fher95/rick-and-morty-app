@@ -1,11 +1,11 @@
+import { tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
+import { setTab } from 'src/app/state/app.actions';
 import { LocationService } from '../service/location.service';
 import { LocationListModel } from '../models/location-list.model';
-import { tap } from 'rxjs/operators';
-import { AppRickMortyStateModel, SearchParamsModel } from 'src/app/models/app.state.model';
-import { Store } from '@ngrx/store';
 import { retrievedLocationsList } from '../state/location.actions';
-import { setTab } from 'src/app/state/app.actions';
+import { AppRickMortyStateModel, SearchParamsModel } from 'src/app/models/app.state.model';
 
 @Component({
   selector: 'app-location-list',
@@ -15,9 +15,7 @@ import { setTab } from 'src/app/state/app.actions';
 export class LocationListComponent implements OnInit {
 
   public locationsList: LocationListModel | null = null;
-  previousPage = 0;
   currentPage = 1;
-  nextPage = 2;
   numberOfPages = 0;
   lastNameSearch: string | null = null;
 
@@ -49,10 +47,10 @@ export class LocationListComponent implements OnInit {
   }
 
   private loadLocationListParams(pageNumber: number, searchText?: string | null) {
-    this.setPageNumbers(pageNumber);
     const paramsQuery: SearchParamsModel = { page: pageNumber, name: searchText !== '' ? searchText : null }
     this.locationService.getLocationsWithParams(paramsQuery).pipe(
       tap(locList => {
+        this.currentPage = pageNumber;
         const action = retrievedLocationsList({ locationList: locList });
         this.store.dispatch(action);
       })
@@ -60,31 +58,8 @@ export class LocationListComponent implements OnInit {
       .subscribe();
   }
 
-  private setPageNumbers(newCurrentPage: number) {
-    this.currentPage = newCurrentPage;
-    this.previousPage = newCurrentPage - 1;
-    this.nextPage = newCurrentPage + 1;
-  }
-
-  public onPreviousPage() {
-    if (this.currentPage > 1) {
-      this.loadLocationListParams(this.currentPage - 1, this.lastNameSearch);
-    }
-  }
-
-  public onNextPage() {
-    if (this.currentPage < this.numberOfPages) {
-      this.loadLocationListParams(this.currentPage + 1, this.lastNameSearch);
-    }
-  }
-
-  public onFirstPage() {
-    this.loadLocationListParams(1, this.lastNameSearch);
-
-  }
-
-  public onLastPage() {
-    this.loadLocationListParams(this.numberOfPages, this.lastNameSearch);
+  public onGoToPage(pageNumber: number) {
+    this.loadLocationListParams(pageNumber, this.lastNameSearch);
   }
 
 }

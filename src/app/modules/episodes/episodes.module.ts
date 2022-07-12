@@ -6,6 +6,7 @@ import { EpisodeListComponent } from './episode-list/episode-list.component';
 import { EpisodeCardComponent } from './episode-card/episode-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EpisodeService } from './service/episode.service';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   providers: [EpisodeService],
@@ -13,7 +14,8 @@ import { EpisodeService } from './service/episode.service';
   imports: [
     CommonModule,
     EpisodesRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ]
 })
 export class EpisodesModule { }

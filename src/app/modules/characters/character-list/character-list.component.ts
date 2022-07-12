@@ -17,9 +17,7 @@ export class CharacterListComponent implements OnInit {
   constructor(private characterService: CharacterService, private store: Store<AppRickMortyStateModel>) { }
 
   characterList: CharacterListModel | any;
-  previousPage = 0;
   currentPage = 1;
-  nextPage = 2;
   numberOfPages = 0;
   lastNameSearch: string | null = null;
 
@@ -49,10 +47,10 @@ export class CharacterListComponent implements OnInit {
   }
 
   private loadCharacterListParams(pageNumber: number, searchText?: string | null) {
-    this.setPageNumbers(pageNumber);
     const paramsQuery: SearchParamsModel = { page: pageNumber, name: searchText !== '' ? searchText : null }
     this.characterService.getCharactersWithParams(paramsQuery).pipe(
       tap(characterList => {
+        this.currentPage = pageNumber;
         const action = retrievedCharacterList({ characterList: characterList });
         this.store.dispatch(action);
       })
@@ -60,31 +58,8 @@ export class CharacterListComponent implements OnInit {
       .subscribe();
   }
 
-  private setPageNumbers(newCurrentPage: number) {
-    this.currentPage = newCurrentPage;
-    this.previousPage = newCurrentPage - 1;
-    this.nextPage = newCurrentPage + 1;
-  }
-
-  public onPreviousPage() {
-    if (this.currentPage > 1) {
-      this.loadCharacterListParams(this.currentPage - 1, this.lastNameSearch);
-    }
-  }
-
-  public onNextPage() {
-    if (this.currentPage < this.numberOfPages) {
-      this.loadCharacterListParams(this.currentPage + 1, this.lastNameSearch);
-    }
-  }
-
-  public onFirstPage() {
-    this.loadCharacterListParams(1, this.lastNameSearch);
-
-  }
-
-  public onLastPage() {
-    this.loadCharacterListParams(this.numberOfPages, this.lastNameSearch);
+  public onGoToPage(pageNumber: number) {
+    this.loadCharacterListParams(pageNumber, this.lastNameSearch);
   }
 
 }

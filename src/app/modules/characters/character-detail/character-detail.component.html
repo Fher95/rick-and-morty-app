@@ -1,57 +1,60 @@
 <div class="container">
-  <!-- <div class="d-flex justify-content-center"> -->
-    <div class="col container w-50 border border-rounded p-3 pt-4">
-      <div class="d-flex justify-content-center">
-        <img class="" [src]="this.characterInfo?.image" alt="" />
-      </div>
-      <div class="d-flex justify-content-center">
-        <!-- <a href="/characters/detail/2" class="text-decoration-none"> -->
-          <h2 class="bold text-primary">{{ this.characterInfo?.name }}</h2>
-          <!-- </a -->
-      </div>
-      <div class="section d-flex justify-content-center">
-        <div class="d-flex align-items-baseline">
-            <div
-              id="circulo color"
-              style="
-                height: 10px;
-                width: 10px !important;
-                background-color: green;
-                border-radius: 5px;
-              "
-              class=""
-            ></div>
-            <span class="ps-2">{{this.characterInfo?.status}} - {{this.characterInfo?.species}}</span>
-        </div>
-      </div>
-
-      <div class="section row d-flex justify-content-center">
-        <div class="col-4 text-center">
-            <section class="my-1">
-                <span class="text-secondary">Origin:</span>
-                <a href="/locations" class="text-decoration-none"><p>{{this.characterInfo?.origin?.name}}</p></a>
-            </section>
-
-            <section class="my-1">
-                <span class="text-secondary">Gender: </span>
-                <a href="/characters" class="text-decoration-none"><p>{{this.characterInfo?.gender}}</p></a>
-            </section>
-
-            
-            
-        </div>
-        <div class="col-4 text-center">
-            <section class="my-1">
-                <span class="text-secondary">Current location:</span>
-                <a href="/locations" class="text-decoration-none"><p>{{this.characterInfo?.location?.name}}</p></a>
-            </section>
-            <section class="my-1">
-                <span class="text-secondary">Number of episodes:</span>
-                <a href="/episodes" class="text-decoration-none"><p>{{this.characterInfo?.episode?.length}}</p></a>
-            </section>
-        </div>
-
+  <div class="col container w-50 border border-rounded p-3 pt-4">
+    <div class="d-flex justify-content-center">
+      <img class="" [src]="this.characterInfo?.image" alt="" />
+    </div>
+    <div class="d-flex justify-content-center">
+      <h2 class="bold text-primary">{{ this.characterInfo?.name }}</h2>
+    </div>
+    <div class="section d-flex justify-content-center">
+      <div class="d-flex align-items-baseline">
+        <div
+          id="circulo color"
+          style="
+            height: 10px;
+            width: 10px !important;
+            background-color: green;
+            border-radius: 5px;
+          "
+          class=""
+        ></div>
+        <span class="ps-2"
+          >{{ this.characterInfo?.status }} -
+          {{ this.characterInfo?.species }}</span
+        >
       </div>
     </div>
-  <!-- </div> -->
+
+    <div class="section row d-flex justify-content-center">
+      <div class="col-4 text-center">
+        <section class="my-1">
+          <span class="text-secondary">Origin:</span>
+          <a href="/locations" class="text-decoration-none"
+            ><p>{{ this.characterInfo?.origin?.name }}</p></a
+          >
+        </section>
+
+        <section class="my-1">
+          <span class="text-secondary">Gender: </span>
+          <a href="/characters" class="text-decoration-none"
+            ><p>{{ this.characterInfo?.gender }}</p></a
+          >
+        </section>
+      </div>
+      <div class="col-4 text-center">
+        <section class="my-1">
+          <span class="text-secondary">Current location:</span>
+          <a href="/locations" class="text-decoration-none"
+            ><p>{{ this.characterInfo?.location?.name }}</p></a
+          >
+        </section>
+        <section class="my-1">
+          <span class="text-secondary">Number of episodes:</span>
+          <a href="/episodes" class="text-decoration-none"
+            ><p>{{ this.characterInfo?.episode?.length }}</p></a
+          >
+        </section>
+      </div>
+    </div>
+  </div>
 </div>

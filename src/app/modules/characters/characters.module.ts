@@ -7,6 +7,7 @@ import { CharacterListComponent } from './character-list/character-list.componen
 import { CharacterDetailComponent } from './character-detail/character-detail.component';
 import { CharacterCardComponent } from './character-card/character-card.component';
 import { CharacterService } from './services/character.service';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   providers: [CharacterService],
@@ -18,7 +19,8 @@ import { CharacterService } from './services/character.service';
   imports: [
     CommonModule,
     CharactersRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ]
 })
 export class CharactersModule { }

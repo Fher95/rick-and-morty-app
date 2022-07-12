@@ -1,59 +1,15 @@
 <div class="container">
-    <div class="row row-cols-auto d-inline-flex justify-content-evenly">
-      <!-- <app-character-card
-          *ngFor="let charInfo of characterList?.results"
-          [inCharacterInfo]="charInfo"
-          class="col"
-        ></app-character-card> -->
-      <app-episode-card *ngFor="let episode of this.episodeList?.results"
-        class="col my-3"
-        [episodeInfo]="episode"
-      ></app-episode-card>
-    </div>
-  
+  <div class="row row-cols-auto d-inline-flex justify-content-evenly">
+    <app-episode-card
+      *ngFor="let episode of this.episodeList?.results"
+      class="col my-3"
+      [episodeInfo]="episode"
+    ></app-episode-card>
   </div>
-  
-  
-  <nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
-      <li class="page-item">
-        <button
-          class="page-link"
-          (click)="this.onFirstPage()"
-          aria-label="Previous"
-        >
-          <span aria-hidden="true">&laquo;</span>
-        </button>
-      </li>
-      <li class="page-item">
-        <button
-          class="page-link"
-          (click)="this.onPreviousPage()"
-          [hidden]="this.previousPage < 1"
-        >
-          {{ this.previousPage }}
-        </button>
-      </li>
-      <li class="page-item">
-        <button class="page-link bg-primary text-white">
-          {{ this.currentPage }}
-        </button>
-      </li>
-      <li class="page-item">
-        <button
-          class="page-link"
-          (click)="this.onNextPage()"
-          [hidden]="this.nextPage > this.numberOfPages"
-        >
-          {{ this.nextPage }}
-        </button>
-      </li>
-      <li class="page-item">
-        <button class="page-link" (click)="this.onLastPage()" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </button>
-      </li>
-    </ul>
-  </nav>
-  
-  
+</div>
+
+<app-paginator
+  [inCurrentPage]="currentPage"
+  [inNumberOfPages]="numberOfPages"
+  (outGoToPage)="onGoToPage($event)"
+></app-paginator>

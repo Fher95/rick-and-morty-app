@@ -7,6 +7,7 @@ import { LocationCardComponent } from './location-card/location-card.component';
 import { LocationService } from './service/location.service';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   providers: [LocationService],
@@ -17,7 +18,8 @@ import { StoreModule } from '@ngrx/store';
   imports: [
     CommonModule,
     LocationsRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ]
 })
 export class LocationsModule { }

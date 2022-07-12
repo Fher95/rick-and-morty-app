@@ -4,9 +4,7 @@ import { SearchParamsModel } from 'src/app/models/app.state.model';
 import { getCleanParams } from 'src/app/models/utils';
 import { EpisodeListModel } from '../model/episode-list.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class EpisodeService {
 
   constructor(private httpClient: HttpClient) { }
